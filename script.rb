@@ -3,10 +3,10 @@ class Mastermind
     @@game_over = false
     def initialize(p1)
         system('clear')
-        @computer_choices = ['red']
+        @computer_choices = %w[red blue green purple black yellow]
         @computer_guess = @computer_choices.sample
         welcome_screen(p1)
-        p1.play(p1, @computer_guess)
+        p1.play(p1, @computer_choices, @computer_guess)
     end
 
     def welcome_screen(p1)
@@ -27,7 +27,7 @@ class Player
 
   def initialize
     player_name
-    @choices = %w[Red Blue]
+    @choices = %w[red blue green purple black yellow]
     puts "Hi #{@name}, welcome to MasterMind"
   end
 
@@ -36,17 +36,35 @@ class Player
     @name = gets.chomp
   end
 
-  def play(p1, computer_guess)
+  def play(p1, computer_choices, computer_guess)
     puts "#{p1.name} you have X guesses left over"
-        puts "Guess!"
-        player_guess = gets.chomp.downcase
-        if player_guess == computer_guess
-            puts '1'
-        elsif computer_guess.any? == player_guess
-            puts '2'
-        else puts 'you lose'
+    puts "Guess!"
+    player_guesses = player_guesses()
+    check_if_guess_exists(player_guesses)
+    check_if_guess_is_in_right_spot(player_guesses)
+
+    def check_if_guess_exists(player_guesses, computer_choices)
+        if computer_choices.any? == player_guesses
+            puts 'white'
         end
     end
+        
+    def check_if_guess_is_in_right_spot(player_guesses, computer_choices, computer_guess)
+        if computer_choices.index(computer_guesses) == computer_choices.index(player_guesses)  
+            puts 'black'
+        end      
+    end
+
+    def player_guesses
+        player_guesses = []
+        for i in 1..4 do
+            puts "Guess spot #{i}"
+            guess = gets.chomp.downcase
+            player_guesses.push(guess)
+        end
+        player_guesses
+    end
+end
 end
 
 p1 = Player.new
