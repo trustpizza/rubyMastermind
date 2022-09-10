@@ -45,9 +45,11 @@ class Mastermind
         guesses_correct += 1 if item == guess
       end
     end
+    feed_back = ''
     for i in 1..guesses_correct
-      puts "[]".green
+      feed_back += "[]"
     end
+    puts feed_back.green
   end
 
   def check_if_guess_is_in_right_spot(player_guesses, computer_guess)
@@ -59,10 +61,12 @@ class Mastermind
     end
     if guesses_correct == 4
       puts "You Cracked the Code!"
-    else 
+    else
+      feed_back = '' 
       for i in 1..guesses_correct
-        puts "[]".red
+        feed_back += "[]"
       end
+      puts feed_back.red
     end
   end
 
@@ -70,12 +74,12 @@ class Mastermind
     rounds_played = 0
     until @@game_over == true
         puts "#{p1.name} you have #{9 - rounds_played} guesses left over"
-        puts 'Guess!'
+        puts rounds_played == 0 ? 'Guess!' : 'Guess again!'
         rounds_played += 1
         player_guesses = player_guesses()
         check_if_guess_exists(player_guesses, @computer_guess)
         check_if_guess_is_in_right_spot(player_guesses, computer_guess)
-        if rounds_played == 2
+        if rounds_played == 9 
             @@game_over = true
             puts "Game over #{p1.name}. You did not crack the code!"
             puts "The code was #{computer_guess}"
