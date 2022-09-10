@@ -56,16 +56,26 @@ class Mastermind
             puts "#{player_guesses[i]} is the correct color and location"
         end
     end
-
-    binding.pry
   end
 
   def play(p1, _computer_choices, _computer_guess)
-    puts "#{p1.name} you have X guesses left over"
-    puts 'Guess!'
-    player_guesses = player_guesses()
-    check_if_guess_exists(player_guesses, @computer_guess)
-    check_if_guess_is_in_right_spot(player_guesses, @computer_guess)
+    until @@game_over == true
+        rounds_played = 0
+        puts "#{p1.name} you have X guesses left over"
+        puts 'Guess!'
+        player_guesses = player_guesses()
+        check_if_guess_exists(player_guesses, @computer_guess)
+        check_if_guess_is_in_right_spot(player_guesses, @computer_guess)
+        rounds_played += 1
+        if rounds_played == 1
+            @@game_over = true
+            puts "Game over #{p1.name}. You did not crack the code!"
+        elsif
+            # All guesses are in the right spot
+            # You win!
+        end
+    end
+    
   end
 end
 
