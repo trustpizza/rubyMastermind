@@ -61,6 +61,8 @@ class Mastermind
     end
     if guesses_correct == 4
       puts "You Cracked the Code!"
+      @@game_over = true
+      puts "The code was #{computer_guess}"
     else
       feed_back = '' 
       for i in 1..guesses_correct
@@ -79,14 +81,14 @@ class Mastermind
         player_guesses = player_guesses()
         check_if_guess_exists(player_guesses, @computer_guess)
         check_if_guess_is_in_right_spot(player_guesses, computer_guess)
-        if rounds_played == 9 
+        if rounds_played > 9 
             @@game_over = true
             puts "Game over #{p1.name}. You did not crack the code!"
             puts "The code was #{computer_guess}"
-        #elsif
-            # All guesses are in the right spot
-            # You win!
         end
+    end
+    if @@game_over == true
+      puts 'Thanks for playing!'
     end
   end
 end
