@@ -49,13 +49,12 @@ class Mastermind
                 end
             end
         end
-        binding.pry
     end
         
-    def check_if_guess_is_in_right_spot(player_guesses, computer_choices, computer_guess)
+    def check_if_guess_is_in_right_spot(player_guesses, computer_choices)
         for i in 0..3
             if player_guesses[i] == computer_choices[i]
-                puts 'Black'
+                puts "#{player_guesses[i]} is the correct color and location"
             end
         end
     end
@@ -65,7 +64,7 @@ class Mastermind
         puts "Guess!"
         player_guesses = player_guesses()
         check_if_guess_exists(player_guesses, @computer_guess)
-        check_if_guess_is_in_right_spot(player_guesses)
+        check_if_guess_is_in_right_spot(player_guesses, @computer_choices)
     end
 end
         
